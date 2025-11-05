@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "b0a1de2c-730a-4691-b9b3-c6d41d2d0652",
+		"name": "Payment Reminder Service - Day 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49834887",
+		"_collection_link": "https://bkanta-3010270.postman.co/workspace/c6e61675-a510-4c4d-87b4-5fb82f8e66ad/collection/49834887-b0a1de2c-730a-4691-b9b3-c6d41d2d0652?action=share&source=collection_link&creator=49834887"
+	},
+	"item": [
+		{
+			"name": "Welcome Message",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Actuator Health",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

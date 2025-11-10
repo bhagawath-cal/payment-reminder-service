@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
@@ -15,19 +14,18 @@ public class SecurityConfig {
   @Order(1)
   SecurityFilterChain healthChain(HttpSecurity http) throws Exception {
     http
+      // In your Spring Security version this overload takes String patterns
       .securityMatcher(
-        new AntPathRequestMatcher("/healthz"),
-        new AntPathRequestMatcher("/actuator/health"),
-        new AntPathRequestMatcher("/actuator/health/**"),
-        new AntPathRequestMatcher("/api/health"),
-        new AntPathRequestMatcher("/api/health/**")
+        "/healthz",
+        "/actuator/health", "/actuator/health/**",
+        "/api/health", "/api/health/**"
       )
       .csrf(csrf -> csrf.disable())
       .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
     return http.build();
   }
 
-  // Chain 2: everything else → authenticated (basic)
+  // Chain 2: everything else → authenticated
   @Bean
   @Order(2)
   SecurityFilterChain appChain(HttpSecurity http) throws Exception {

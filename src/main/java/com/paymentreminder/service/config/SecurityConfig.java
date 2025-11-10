@@ -8,18 +8,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/actuator/health", "/actuator/health/**",
-                    "/api/health", "/api/health/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-            )
-            .httpBasic(basic -> {});   // keep for protected endpoints
-        return http.build();
-    }
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+      .csrf(csrf -> csrf.disable())
+      .authorizeHttpRequests(auth -> auth
+        .requestMatchers(
+          "/healthz",
+          "/api/health", "/api/health/**",
+          "/actuator/health", "/actuator/health/**"
+        ).permitAll()
+        .anyRequest().authenticated()
+      )
+      .httpBasic(basic -> {});
+    return http.build();
+  }
 }

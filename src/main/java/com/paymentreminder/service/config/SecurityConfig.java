@@ -12,17 +12,12 @@ public class SecurityConfig {
   @Bean
   SecurityFilterChain security(HttpSecurity http) throws Exception {
     http
-      .csrf(csrf -> csrf.disable())
-      .authorizeHttpRequests(auth -> auth
-        // ✅ Permit health endpoints (Actuator + your custom one)
-        .requestMatchers("/actuator/health", "/actuator/health/**", "/healthz").permitAll()
-        // (Optional) permit info too, if you expose it
-        .requestMatchers("/actuator/info").permitAll()
-        // everything else must authenticate
+    .csrf(csrf -> csrf.disable())
+    .authorizeHttpRequests(auth -> auth
+        .requestMatchers("/healthz", "/actuator/health", "/actuator/health/**", "/api/health").permitAll()
         .anyRequest().authenticated()
-      )
-      // keep basic on, so non-health paths give 401 (not 403) without creds
-      .httpBasic(basic -> {});
+    )
+    .httpBasic(basic -> {});
     return http.build();
   }
 }
